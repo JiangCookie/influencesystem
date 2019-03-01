@@ -48,7 +48,6 @@
     </div>
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm " id="add">增加故障</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">刷新</button>
     </div>
     <table class="layui-hide" id="test" lay-filter="test"></table>
 </div>
@@ -186,6 +185,15 @@
     <span>四川</span>
     {{# } else if(d.branchId == 4) { }}  
     <span>山西</span>
+    {{# }}} 
+
+</script>
+
+<script type="text/html" id="checkFinish">
+    {{# if (d.troubleState == 1) { }}
+       <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="edit">已完成</ a>
+    {{# } else { }}  
+    <a class="layui-btn layui-btn-xs" lay-event="edit">更新故障状态</ a>
     {{# }}} 
 
 </script>

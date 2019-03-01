@@ -26,14 +26,18 @@ layui.use('table', function () {
         , cols: [[
             {type: 'checkbox', fixed: 'left'}
             , {field: 'troubleId', title: 'ID', width: 80, fixed: 'left', unresize: true}
-            , {field: 'tableName', title: '故障名称', width: 150, edit: 'text'}
-            , {field: 'createTime', title: '故障时间', width: 150, edit: 'text'}
+            , {field: 'tableName', title: '故障名称', width: 150 }
+            , {field: 'createTime', title: '故障时间', width: 150}
             , {field: 'branchId', title: '故障分支', width: 150, templet: '#branchIDtoStr'}
             , {field: 'descipton', title: '故障描述', width: 150}
             , {field: 'troubleState', title: '故障状态', width: 150, templet: '#idToStr'}
-            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 223}
+            , {fixed: 'right', title: '操作', width: 223, templet: '#checkFinish'}
         ]]
-        , page: true
+        , page: false
+        , initSort: {
+            field: 'troubleState' //排序字段，对应 cols 设定的各字段名
+            ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+        }
     });
 
     //头工具栏事件
@@ -60,35 +64,28 @@ layui.use('table', function () {
         var data = obj.data;
 
         if (obj.event === 'edit') {
-            layer.prompt({
-                formType: 2
-                , value: data.email
-            }, function (value, index) {
-                obj.update({
-                    email: value
-                });
-                layer.close(index);
+            $.ajax({
+                url: "/fault/update.do",//要请求的服务器url
+                //这是一个对象，表示请求的参数，两个参数：method=ajax&val=xxx，服务器可以通过request.getParameter()来获取
+                //data:{method:"ajaxTest",val:value},
+                data: {
+                    troubleId: data.troubleId,
+                    troubleState: 1,
+                },
+                async: true,   //是否为异步请求
+                cache: false,  //是否缓存结果
+                type: "POST", //请求方式为POST
+                dataType: "json",   //服务器返回的数据是什么类型
+                success: function(result){  //这个方法会在服务器执行成功是被调用 ，参数result就是服务器返回的值(现在是json类型)
+                    if(result){
+                        console.log("success");
+                    }else{
+                        console.log("false");
+                    }
+                }
             });
         }
 
-        //console.log(obj)
-        // if (obj.event === 'del') {
-        //     layer.confirm('真的删除行么', function (index) {
-        //         obj.del();
-        //         //todo
-        //         layer.close(index);
-        //     });
-        // } else if (obj.event === 'edit') {
-        //     layer.prompt({
-        //         formType: 2
-        //         , value: data.email
-        //     }, function (value, index) {
-        //         obj.update({
-        //             email: value
-        //         });
-        //         layer.close(index);
-        //     });
-        // }
     });
 });
 
