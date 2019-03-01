@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CookieUtil {
     private final static String COOKIE_DOMAIN = "localhost:8083";
-    private final static String COOKIE_NAME = "login_token";
+    private final static String COOKIE_NAME = "video_login_token";
 
     public static void writeLoginToken(HttpServletResponse response, String token){
         Cookie cookie = new Cookie(COOKIE_NAME,token);

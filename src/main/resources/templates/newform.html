@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>故障单系统</title>
+    <link href="bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="header">
+                <div class="header-logo">
+                    <a><img src="images/yd_logo.png"/></a>
+                    <div class="navigation">
+                        <span style="width:125px;height:30px;font-size: 25px;color: #676a6c;margin-left: -180px">故障单目录</span>
+                        <div style="margin: -30px 0 0 50px">
+                              <em style="" id="name">zhangsan</em>
+                            <a href="###" style="">
+                                <img src="images/logout.png" alt="" style="width: 30px;margin-left: 10px">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm " id="add">增加故障</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">刷新</button>
+    </div>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="layui/layui.js" charset="utf-8"></script>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<!-- Jquery -->
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "http://localhost:8083/user/get_user_info.do",
+            type: "POST",
+            async: false,
+            success: function (res) {
+                console.log(res);
+                location = "new-form.html";
+            }
+        })
+        $("#name").val()
+    });
+
+    $("#add").click(function () {
+        window.location.href = "index.html";
+    })
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            , url: 'http://localhost:8083/fault/list.do'
+            , toolbar: '#toolbarDemo'
+            , title: '用户数据表'
+            , cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'id', title: 'ID', width: 80, fixed: 'left', unresize: true}
+                , {field: 'tableName', title: '故障名称', width: 150, edit: 'text'}
+                , {field: 'createTime', title: '故障时间', width: 150, edit: 'text'}
+                , {field: 'branchId', title: '故障分支', width: 150}
+                , {field: 'descipton', title: '故障描述', width: 150}
+                , {field: 'troubleState', title: '故障状态', width: 150,}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 223}
+            ]]
+            , page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    window.location.href = "index.html";
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+            }
+            ;
+        });
+
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.prompt({
+                    formType: 2
+                    , value: data.email
+                }, function (value, index) {
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

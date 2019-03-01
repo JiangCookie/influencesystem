@@ -4,11 +4,13 @@ import com.sitech.tc.influencesystem.common.*;
 import com.sitech.tc.influencesystem.pojo.User;
 import com.sitech.tc.influencesystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.util.StringUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -61,5 +63,30 @@ public class UserController {
         } else {
             return ServerResponse.createByErrorMessage("密码不正确, 请重试...");
         }
+    }
+
+    /**
+     * @Description: 注销
+     */
+    @GetMapping("logout.do")
+    public String logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        CookieUtil.delLoginToken(httpServletRequest,httpServletResponse);
+        redis.del(loginToken);
+
+        return "注销成功";
+    }
+
+    /**
+     * @Description: 获取用户信息
+     */
+    @PostMapping("get_user_info.do")
+    public ServerResponse<User> getUserInfo(HttpServletRequest request){
+        String loginToken = CookieUtil.readLoginToken(request);
+        User user = JsonUtils.jsonToPojo(redis.get(loginToken),User.class);
+        if(user != null){
+            return ServerResponse.createBySuccess(user);
+        }
+        return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
     }
 }

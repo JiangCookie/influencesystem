@@ -130,13 +130,13 @@
 </div>
 <script type="text/javascript">
     jQuery(".banner").slide({
-    titCell: ".hd ul",
-    mainCell: ".bd ul",
-    effect: "fold",
-    autoPlay: true,
-    autoPage: true,
-    trigger: "click"
-});
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
 
     $("#send-btn").click(function () {
         $.ajax({
@@ -148,7 +148,7 @@
             },
             success: function (result) {
                 console.log(result.status)
-                if(result.status == 0){
+                if (result.status == 0) {
                     location = "new-form.html";
                 }
             }

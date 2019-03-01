@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 
 <head>
 
@@ -11,37 +11,50 @@
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="fault/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="fault/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="fault/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="fault/css/animate.css" rel="stylesheet">
     <link href="fault/css/style.css?v=4.1.0" rel="stylesheet">
-    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
 
 </head>
 
 <body class="gray-bg">
 
+<div class="header_nav">
+    <a><img style="padding: 20px 0 0 10px" src="images/yd_logo.png" height="70"/></a>
+    <div class="nav_box">
+        <div style="width:125px;height:30px;font-size: 25px;margin: 30px 0 0 -100px">故障单创建</div>
+    </div>
+    <div class="nav_u">
+        <div id="nav_user"><em>zhangsan</em></div>
+        <a href="###">
+            <img src="images/logout.png" alt="" style="width: 30px;margin-left: 10px">
+        </a>
+    </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>故障 <small>故障提交表单</small></h5>
-                </div>
+                <!--<div class="ibox-title">-->
+                    <!--<h3>故障单提交表单-->
+                    <!--</h3>-->
+                <!--</div>-->
                 <div class="ibox-content">
                     <form method="get" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">故障单名称</label>
-
+                            <label class="col-sm-2 control-label">故障单的名称</label>
                             <div class="col-sm-2">
                                 <input type="text" name="faultName" class="form-control">
                             </div>
 
                             <label class="col-sm-2 control-label">创建日期</label>
                             <div class="col-sm-2 layui-input-inline">
-                                <input type="text" name="dateTime" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                                <input type="text" name="dateTime" class="layui-input" id="test1"
+                                       placeholder="yyyy-MM-dd">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -49,7 +62,7 @@
                             <label class="col-sm-2 control-label">故障发生分支</label>
 
                             <div class="col-sm-2">
-                                <select class="form-control m-b"  id="branch" name="branch">
+                                <select class="form-control m-b" id="branch" name="branch">
                                     <option value="">----请选择----</option>
                                     <option value="黑龙江">黑龙江</option>
                                     <option value="上海">上海</option>
@@ -63,34 +76,39 @@
                             <label class="col-sm-2 control-label"></label>
 
                             <div class="col-sm-2" style="position: absolute;left: 200px; ">
-                                <strong>系统类型</strong>
+                                <strong style="margin-left: 40px">系统类型</strong>
                             </div>
-                            <div class="col-sm-2 col-sm-offset-1" style="position: absolute;left: 360px; " >
+                            <div class="col-sm-2 col-sm-offset-1" style="position: absolute;left: 360px; ">
                                 <strong>本次故障影响系统</strong>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">系统类型</label>
-                            <div class="col-sm-4 ">
-
-                                <div class="col-sm-5 m-l-n">
-                                    <select class="form-control" id="left_" multiple="">
-                                        <option value="1">订单中心</option>
-                                        <option value="2">账单中心</option>
-                                        <option value="3">开通中心</option>
-                                        <option value="4">结算中心</option>
-                                    </select>
+                            <div id="sys_type">
+                                <!--<label class="col-sm-2 control-label">系统类型</label>-->
+                                <div class="col-sm-4 ">
+                                    <div class="col-sm-5 m-l-n">
+                                        <select class="form-control" id="left_" multiple="">
+                                            <option value="1">订单中心</option>
+                                            <option value="2">账单中心</option>
+                                            <option value="3">开通中心</option>
+                                            <option value="4">结算中心</option>
+                                        </select>
+                                    </div>
+                                    <div style="position: absolute;left: 170px; top: 15px;">
+                                        <input class="btn btn-primary" type="button" name="add" id="add" value="增加"
+                                               onclick="RightMove();"/>
+                                    </div>
+                                    <div style="position: absolute;left: 170px; top: 50px;">
+                                        <input class="btn btn-primary" type="button" name="delete" id="delete"
+                                               value="删除"
+                                               onclick="LeftMove();"/>
+                                    </div>
+                                    <div style="position: absolute;left: 270px; ">
+                                        <select class="form-control" name="systemType"
+                                                style="width: 100px;height: 93px;"
+                                                id="right_" size="10" multiple="multiple"></select>
+                                    </div>
                                 </div>
-                                <div  style="position: absolute;left: 170px; top: 15px;">
-                                    <input class="btn btn-primary" type="button" name="add" id="add" value="增加" onclick="RightMove();" />
-                                </div>
-                                <div  style="position: absolute;left: 170px; top: 50px;">
-                                    <input class="btn btn-primary" type="button" name="delete" id="delete" value="删除" onclick="LeftMove();" />
-                                </div>
-                                <div  style="position: absolute;left: 270px; ">
-                                    <select class="form-control" name="systemType" style="width: 100px;height: 93px;" id="right_" size="10" multiple="multiple"></select>
-                                </div>
-
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -98,7 +116,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">故障描述</label>
                             <div class="col-sm-5">
-                                <textarea class="form-control" name="desc" style="height: 100px"></textarea>
+                                <textarea class="form-control" name="desc" style="height: 100px"
+                                          placeholder="最多输入1000个字..."></textarea>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -116,7 +135,6 @@
 </div>
 
 
-
 <!-- 全局js -->
 <script src="fault/js/jquery.min.js"></script>
 <script src="fault/js/bootstrap.min.js"></script>
@@ -130,76 +148,83 @@
 <script src="layui/layui.js" charset="utf-8"></script>
 
 <script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-
-
-
-
-    });
-
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        //常规用法
-        laydate.render({
-            elem: '#test1'
-        });
+    $("#push").click(function () {
+        $.ajax({
+            url: "/add",
+            type: "POST",
+            async: false,
+            data: {
+                "tableName": $('input[name="faultName"]').val(),
+                "createTime": $('input[name="dateTime"]').val(),
+                "branchId": $("#branch option:selected").val(),
+                "sysId": $("#rightID option:first").val(),
+                "descipton": $('textarea[name="desc"]').val()
+            },
+            success: function (res) {
+                location = "new-form.html";
+            }
+        })
     })
 
-// 
-//     $("#add").click(function(){
-//         if($("##leftID option:selected").length>0)
-//         {
-//             $("##leftID option:selected").each(function(){
-//                 $("##rightID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-//                 $(this).remove();
-//             })
-//         }
-//         else
-//         {
-//             alert("请选择要添加的分包！");
-//         }
-//     });
-//     $("#delete").click(function(){
-//         if($("##rightID option:selected").length>0)
-//         {
-//             $("##rightID option:selected").each(function(){
-//                 $("##leftID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-//                 $(this).remove();
-//             })
-//         }
-//         else
-//         {
-//             alert("请选择要删除的分包！");
-//         }
-//     })
-// 
-//     $("#push").click(function () {
-//         $.ajax({
-//             url: "http://localhost:8083/add",
-//             type: "POST",
-//             async: false,
-//             data: {
-//                 "faultName": $('input[name="faultName"]').val(),
-//                 "dateTime": $('input[name="dateTime"]').val(),
-//                 "branch": $("#branch option:selected").val(),
-//                 "systemType": $("##rightID option:first").val(),
-//                 "desc": $('textarea[name="desc"]').val()
-//             },
-//             success: function (res) {
-//                 console.log(res);
-//             }
-//         })
-//     })
-//将左边的移动到右边，并删掉左边的数据
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#test1',
+            type: 'datetime'
+        });
+    });
 
-function $(id) {
+    //
+    //     $("#add").click(function(){
+    //         if($("##leftID option:selected").length>0)
+    //         {
+    //             $("##leftID option:selected").each(function(){
+    //                 $("##rightID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+    //                 $(this).remove();
+    //             })
+    //         }
+    //         else
+    //         {
+    //             alert("请选择要添加的分包！");
+    //         }
+    //     });
+    //     $("#delete").click(function(){
+    //         if($("##rightID option:selected").length>0)
+    //         {
+    //             $("##rightID option:selected").each(function(){
+    //                 $("##leftID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+    //                 $(this).remove();
+    //             })
+    //         }
+    //         else
+    //         {
+    //             alert("请选择要删除的分包！");
+    //         }
+    //     })
+    //
+    //     $("#push").click(function () {
+    //         $.ajax({
+    //             url: "http://localhost:8083/add",
+    //             type: "POST",
+    //             async: false,
+    //             data: {
+    //                 "faultName": $('input[name="faultName"]').val(),
+    //                 "dateTime": $('input[name="dateTime"]').val(),
+    //                 "branch": $("#branch option:selected").val(),
+    //                 "systemType": $("##rightID option:first").val(),
+    //                 "desc": $('textarea[name="desc"]').val()
+    //             },
+    //             success: function (res) {
+    //                 console.log(res);
+    //             }
+    //         })
+    //     })
+    //将左边的移动到右边，并删掉左边的数据
+
+    function $(id) {
         return document.getElementById(id);
     }
-	
+
     function RightMove() {
         let con_data = [];
         let index_data = [];
@@ -250,7 +275,7 @@ function $(id) {
             $("right_").removeChild($("right_").options[index_data[i]]);
         }
     }
-	
+
 </script>
 
 </body>

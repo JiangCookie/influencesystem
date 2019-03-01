@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>系统登录</title>
+    <link href="css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all"/>
+    <link href="css/demo.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="js/jquery1.42.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+
+
+    <script>
+        $(function () {
+
+            $(".i-text").focus(function () {
+                $(this).addClass('h-light');
+            });
+
+            $(".i-text").focusout(function () {
+                $(this).removeClass('h-light');
+            });
+
+            $("#username").focus(function () {
+                var username = $(this).val();
+                if (username == '输入账号') {
+                    $(this).val('');
+                }
+            });
+
+            $("#username").focusout(function () {
+                var username = $(this).val();
+                if (username == '') {
+                    $(this).val('输入账号');
+                }
+            });
+
+
+            $("#password").focus(function () {
+                var username = $(this).val();
+                if (username == '输入密码') {
+                    $(this).val('');
+                }
+            });
+
+
+            $("#yzm").focus(function () {
+                var username = $(this).val();
+                if (username == '输入验证码') {
+                    $(this).val('');
+                }
+            });
+
+            $("#yzm").focusout(function () {
+                var username = $(this).val();
+                if (username == '') {
+                    $(this).val('输入验证码');
+                }
+            });
+
+
+            $(".registerform").Validform({
+                tiptype: function (msg, o, cssctl) {
+                    var objtip = $(".error-box");
+                    cssctl(objtip, o.type);
+                    objtip.text(msg);
+                },
+                ajaxPost: true
+            });
+
+        });
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+
+<div class="header">
+    <h1 class="headerLogo"><img alt="logo" src="images/yd_logo.png"></h1>
+</div>
+
+<div class="banner">
+
+    <div class="login-aside">
+        <div id="o-box-up"></div>
+        <div id="o-box-down" style="table-layout:fixed;">
+            <div class="error-box"></div>
+
+            <form class="registerform" method="post" action="">
+                <div class="fm-item">
+                    <label for="logonId" class="form-label">登录账号：</label>
+                    <input type="text" value="" maxlength="100" id="username" class="i-text"
+                           datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！" placeholder="请输入账号">
+                    <div class="ui-form-explain"></div>
+                </div>
+
+                <div class="fm-item">
+                    <label for="logonId" class="form-label">登陆密码：</label>
+                    <input type="password" value="" maxlength="100" id="password" class="i-text" datatype="*6-16"
+                           nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" placeholder="请输入密码">
+                    <div class="ui-form-explain"></div>
+                </div>
+
+                <div class="fm-item">
+                    <label for="logonId" class="form-label"></label>
+                    <input type="button" value="" tabindex="4" id="send-btn" class="btn-login">
+                    <div class="ui-form-explain"></div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="bd">
+        <ul>
+            <li style="background:url(images/yidong.png) center 0 no-repeat;background-size:80% 100%"></li>
+            <li style="background:url(images/yidong.png) center 0 no-repeat;background-size:80% 100%"></li>
+        </ul>
+    </div>
+
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(".banner").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
+
+    $("#send-btn").click(function () {
+        $.ajax({
+            url: "http://localhost:8083/user/login.do",
+            type: "POST",
+            data: {
+                username: $("#username").val(),
+                password: $("#password").val()
+            },
+            success: function (result) {
+                console.log(result.status)
+                if (result.status == 0) {
+                    location = "new-form.html";
+                }
+            }
+        })
+
+    })
+
+</script>
+
+
+</body>
+</html>
