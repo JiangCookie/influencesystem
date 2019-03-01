@@ -12,6 +12,17 @@ $(document).ready(function(){
 
 });
 
+
+$("#logg").click(function () {
+    $.ajax({
+        url: "/user/logout.do",
+        type: "GET",
+        async: false,
+        success: function (res) {
+            location = "index";
+        }
+    })
+});
 $("#add").click(function () {
     location = "form_basic";
 });
