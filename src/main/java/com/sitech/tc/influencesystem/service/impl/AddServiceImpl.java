@@ -65,9 +65,9 @@ public class AddServiceImpl implements AddService {
     }
 
     @Override
-    public ServerResponse update(Trouble faultprocessJyh) {
-
-        int  result = troubleMapper.updateByPrimaryKeySelective(faultprocessJyh);
+    public ServerResponse update(Trouble trouble) {
+        trouble.setTroubleState(1);
+        int  result = troubleMapper.updateByPrimaryKeySelective(trouble);
         if(result > 0 ){
             return ServerResponse.createBySuccessMessage("更新故障成功");
         }
