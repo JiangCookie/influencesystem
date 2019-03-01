@@ -1,10 +1,8 @@
 package com.sitech.tc.influencesystem.controller;
 
 import com.sitech.tc.influencesystem.common.*;
-import com.sitech.tc.influencesystem.common.*;
 import com.sitech.tc.influencesystem.pojo.User;
 import com.sitech.tc.influencesystem.service.UserService;
-import com.sitech.tc.influencesystem.common.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

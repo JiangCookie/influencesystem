@@ -22,18 +22,19 @@
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
+            <property name="javaFileEncoding" value="UTF-8"/>
         </commentGenerator>
 
         <!--用于指定数据库连接信息，该元素必选，并且只能有一个-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://188.131.133.149:3306/maitu"
-                        userId="root"
-                        password="123456">
+                        connectionURL="jdbc:mysql://172.18.51.179:3307/sonar?useUnicode=true;characterEncoding=utf-8"
+                        userId="sonar"
+                        password="sonar">
         </jdbcConnection>
 
 
         <!-- 对应生成的pojo所在包 -->
-        <javaModelGenerator targetPackage="com.jyh.influencesystem.pojo" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="com.sitech.tc.influencesystem.pojo" targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -42,15 +43,17 @@
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
         <!-- 配置mapper对应的java映射 -->
-        <javaClientGenerator targetPackage="com.jyh.influencesystem.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.sitech.tc.influencesystem.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
 
         <!--指定数据库表-->
-        <table tableName="faultProcess_jyh"  catalog="maitu">
+        <table tableName="user"  catalog="sonar">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
         </table>
-
+        <table tableName="trouble"  catalog="sonar">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+        </table>
 
     </context>
 

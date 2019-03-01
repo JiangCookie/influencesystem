@@ -2,9 +2,10 @@ package com.sitech.tc.influencesystem.service;
 
 
 import com.sitech.tc.influencesystem.common.ServerResponse;
-import com.sitech.tc.influencesystem.pojo.FaultprocessJyh;
+import com.sitech.tc.influencesystem.pojo.Trouble;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author JYH
@@ -16,30 +17,30 @@ public interface AddService {
 
     /**
      * @Description: 添加故障
-     * @param faultprocessJyh
+     * @param trouble
      * @return
      */
-   ServerResponse add(FaultprocessJyh faultprocessJyh);
+   ServerResponse add(Trouble trouble);
 
     /**
      * @Description: 获取故障列表
      * @return
      */
-    ServerResponse<List<FaultprocessJyh>> getList();
+    Map<String,Object> getList();
 
     /**
      * @Description: 删除故障
-     * @param faultId
+     * @param troubleId
      * @return
      */
-    ServerResponse delete(String faultId);
+    ServerResponse delete(Integer troubleId);
 
     /**
      * @Description: 更改故障
-     * @param faultprocessJyh
+     * @param trouble
      * @return
      */
-    ServerResponse update(FaultprocessJyh faultprocessJyh);
+    ServerResponse update(Trouble trouble);
 
 
 }

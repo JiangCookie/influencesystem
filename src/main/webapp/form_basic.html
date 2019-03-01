@@ -12,10 +12,10 @@
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="fault/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="fault/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="fault/css/animate.css" rel="stylesheet">
+    <link href="fault/css/style.css?v=4.1.0" rel="stylesheet">
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
 
 </head>
@@ -74,7 +74,7 @@
                             <div class="col-sm-4 ">
 
                                 <div class="col-sm-5 m-l-n">
-                                    <select class="form-control" id="leftID" multiple="">
+                                    <select class="form-control" id="left_" multiple="">
                                         <option value="1">订单中心</option>
                                         <option value="2">账单中心</option>
                                         <option value="3">开通中心</option>
@@ -82,13 +82,13 @@
                                     </select>
                                 </div>
                                 <div  style="position: absolute;left: 170px; top: 15px;">
-                                    <input class="btn btn-primary" type="button" name="add" id="add" value="增加" />
+                                    <input class="btn btn-primary" type="button" name="add" id="add" value="增加" onclick="RightMove();" />
                                 </div>
                                 <div  style="position: absolute;left: 170px; top: 50px;">
-                                    <input class="btn btn-primary" type="button" name="delete" id="delete" value="删除" />
+                                    <input class="btn btn-primary" type="button" name="delete" id="delete" value="删除" onclick="LeftMove();" />
                                 </div>
                                 <div  style="position: absolute;left: 270px; ">
-                                    <select class="form-control" name="systemType" style="width: 100px;height: 93px;" id="rightID" size="10" multiple="multiple"></select>
+                                    <select class="form-control" name="systemType" style="width: 100px;height: 93px;" id="right_" size="10" multiple="multiple"></select>
                                 </div>
 
                             </div>
@@ -118,14 +118,14 @@
 
 
 <!-- 全局js -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="fault/js/jquery.min.js"></script>
+<script src="fault/js/bootstrap.min.js"></script>
 
 <!-- 自定义js -->
-<script src="js/content.js"></script>
+<script src="fault/js/content.js"></script>
 
 <!-- iCheck -->
-<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="fault/js/plugins/iCheck/icheck.min.js"></script>
 
 <script src="layui/layui.js" charset="utf-8"></script>
 
@@ -149,53 +149,108 @@
         });
     })
 
+// 
+//     $("#add").click(function(){
+//         if($("##leftID option:selected").length>0)
+//         {
+//             $("##leftID option:selected").each(function(){
+//                 $("##rightID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+//                 $(this).remove();
+//             })
+//         }
+//         else
+//         {
+//             alert("请选择要添加的分包！");
+//         }
+//     });
+//     $("#delete").click(function(){
+//         if($("##rightID option:selected").length>0)
+//         {
+//             $("##rightID option:selected").each(function(){
+//                 $("##leftID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+//                 $(this).remove();
+//             })
+//         }
+//         else
+//         {
+//             alert("请选择要删除的分包！");
+//         }
+//     })
+// 
+//     $("#push").click(function () {
+//         $.ajax({
+//             url: "http://localhost:8083/add",
+//             type: "POST",
+//             async: false,
+//             data: {
+//                 "faultName": $('input[name="faultName"]').val(),
+//                 "dateTime": $('input[name="dateTime"]').val(),
+//                 "branch": $("#branch option:selected").val(),
+//                 "systemType": $("##rightID option:first").val(),
+//                 "desc": $('textarea[name="desc"]').val()
+//             },
+//             success: function (res) {
+//                 console.log(res);
+//             }
+//         })
+//     })
+//将左边的移动到右边，并删掉左边的数据
 
-    $("#add").click(function(){
-        if($("#leftID option:selected").length>0)
-        {
-            $("#leftID option:selected").each(function(){
-                $("#rightID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-                $(this).remove();
-            })
-        }
-        else
-        {
-            alert("请选择要添加的分包！");
-        }
-    });
-    $("#delete").click(function(){
-        if($("#rightID option:selected").length>0)
-        {
-            $("#rightID option:selected").each(function(){
-                $("#leftID").append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-                $(this).remove();
-            })
-        }
-        else
-        {
-            alert("请选择要删除的分包！");
-        }
-    })
+function $(id) {
+        return document.getElementById(id);
+    }
+	
+    function RightMove() {
+        let con_data = [];
+        let index_data = [];
 
-    $("#push").click(function () {
-        $.ajax({
-            url: "http://localhost:8083/add",
-            type: "POST",
-            async: false,
-            data: {
-                "faultName": $('input[name="faultName"]').val(),
-                "dateTime": $('input[name="dateTime"]').val(),
-                "branch": $("#branch option:selected").val(),
-                "systemType": $("#rightID option:first").val(),
-                "desc": $('textarea[name="desc"]').val()
-            },
-            success: function (res) {
-                console.log(res);
+        //看选中的是哪一个值
+        for (let i = 0; i < $("left_").length; i++) {
+            if ($("left_").options[i].selected) {
+                con_data[con_data.length] = [$("left_").options[i].value, $("left_").options[i].text];
+                index_data[index_data.length] = [i];
             }
-        })
-    })
+        }
 
+        for (let i = 0; i < con_data.length; i++) {
+            let con_fla = true;
+            for (let k = 0; k < $("right_").length; k++) {
+                if (con_data[i][0] == $("right_").options[k].value)
+                    con_fla = false;
+            }
+            if (con_fla)
+                $("right_").options[$("right_").length] = new Option(con_data[i][1], con_data[i][0]);
+        }
+    }
 
+    //将右边的数据全部移动到左边，并删除右边的数据
+    function LeftMove() {
+        let con_data = [];
+        let index_data = [];
+
+        //看选中的是哪一个值
+        for (let i = 0; i < $("right_").length; i++) {
+            if ($("right_").options[i].selected) {
+                con_data[con_data.length] = [$("right_").options[i].value, $("right_").options[i].text];
+                index_data[index_data.length] = [i];
+            }
+        }
+
+        for (let i = 0; i < con_data.length; i++) {
+            let con_fla = true;
+            for (let k = 0; k < $("left_").length; k++) {
+                if (con_data[i][0] == $("left_").options[k].value)
+                    con_fla = false;
+            }
+            if (con_fla)
+                $("left_").options[$("left_").length] = new Option(con_data[i][1], con_data[i][0]);
+        }
+
+        for (let i = index_data.length - 1; i >= 0; i--) {
+            $("right_").removeChild($("right_").options[index_data[i]]);
+        }
+    }
+	
 </script>
 
 </body>

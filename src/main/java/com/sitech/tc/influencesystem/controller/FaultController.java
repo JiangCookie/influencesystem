@@ -1,13 +1,16 @@
 package com.sitech.tc.influencesystem.controller;
 
 import com.sitech.tc.influencesystem.common.ServerResponse;
+import com.sitech.tc.influencesystem.common.TypeEnum;
+import com.sitech.tc.influencesystem.pojo.Trouble;
 import com.sitech.tc.influencesystem.service.AddService;
-import com.sitech.tc.influencesystem.pojo.FaultprocessJyh;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * @Description 故障控制类
@@ -24,13 +27,13 @@ public class FaultController {
 
     /**
      * @Description 添加故障
-     * @param fault
+     * @param trouble
      * @return
      */
     @PostMapping("add.do")
-    public ServerResponse add(FaultprocessJyh fault){
-        if( fault != null){
-           return addService.add(fault);
+    public ServerResponse add(Trouble trouble){
+        if( trouble != null){
+           return addService.add(trouble);
         }
         return ServerResponse.createByErrorMessage("添加失败，没有数据");
     }
@@ -41,7 +44,7 @@ public class FaultController {
      * @return
      */
     @PostMapping("delete.do")
-    public ServerResponse delete(String faultId){
+    public ServerResponse delete(Integer faultId){
         if( faultId != null){
             return addService.delete(faultId);
         }
@@ -51,28 +54,27 @@ public class FaultController {
 
     /**
      * @Description 更新故障状态
-     * @param faultprocessJyh
+     * @param trouble
      * @return
      */
     @PostMapping("update.do")
-    public ServerResponse update(FaultprocessJyh faultprocessJyh){
-        if( faultprocessJyh != null){
-            return addService.update(faultprocessJyh);
+    public ServerResponse update(Trouble trouble){
+        if( trouble != null){
+            return addService.update(trouble);
         }
         return ServerResponse.createByErrorMessage("更新失败，没有数据");
     }
 
-    /**
-     * @Description 更新故障状态
-     * @param faultprocessJyh
-     * @return
-     */
+
     /**
      * @Description 查询故障列表
      * @return
      */
-    @GetMapping("update.do")
-    public ServerResponse selete(){
+    @GetMapping("list.do")
+    public Map<String,Object> selete(){
         return addService.getList();
     }
+
+
+
 }

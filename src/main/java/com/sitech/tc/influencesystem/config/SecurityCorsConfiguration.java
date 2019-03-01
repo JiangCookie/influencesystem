@@ -22,8 +22,8 @@ public class SecurityCorsConfiguration {
         // 是否支持安全证书
         config.setAllowCredentials(true);
         //允许跨域的域名
-        config.addAllowedOrigin("http://localhost:63342");
-
+        config.addAllowedOrigin("*");
+//        config.addAllowedOrigin("http://localhost:8083");
         config.addAllowedHeader(CorsConfiguration.ALL);
         config.addAllowedMethod(CorsConfiguration.ALL);
         source.registerCorsConfiguration("/**", config);

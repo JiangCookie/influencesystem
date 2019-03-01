@@ -1,100 +1,125 @@
-/*
- *
- *   H+ - 后台主题UI框架
- *   version 4.9
- *
-*/
 
-html{height: 100%;}
-body.signin {
-    background: #18c8f6;
-    height: auto;
-    background:url("../img/login-background.jpg") no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: rgba(255,255,255,.95);
+/*---------------------reset----------------------*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin:0; padding:0; border:0; outline:0;}
+ol, ul, li { list-style:none } 
+body { background:#FFF;}
+:focus { outline:0 }
+table { border-collapse:collapse; border-spacing:0 }
+table,table td,table th{border:1px solid #edeada;border-collapse:collapse;}
+address, cite, code, dfn, em, var, i { font-style:normal }
+input[type=button], input[type=submit], button { cursor:pointer; outline:none;}
+.input, select { vertical-align:middle }
+* html .clearfix { zoom:1 }
+*+html .clearfix { zoom:1 }
+textarea{resize:none;}
+a { text-decoration:none; color:#009bd8 }
+.clearfix:after {clear: both;content: ".";display: block;height: 0;overflow: hidden;visibility: hidden;}
+.pos-r{ position:relative;}
+.hide{ display:none;}
+/*---------------------header----------------------*/
+
+.header{ height: 84px;margin:26px auto; overflow: hidden; position: relative; width: 800px; z-index: 2;}
+.headerNav { right: 0;text-align: right;top: 52px; width: 300px; position:absolute;}
+.headerNav a{ color:#515151; font-size:12px; padding:0 2px;}
+.headerNav a:hover{ text-decoration:underline; color:#658b98;}
+
+/*---------------------banner----------------------*/
+.banner{ min-width:1000px;  position:relative;  height:478px; overflow:hidden;  }
+.banner .bd{ position:relative; z-index:0;  }
+.banner .bd ul{ width:100% !important; }
+.banner .bd li{ width:100% !important;  height:478px; }
+.banner .bd li .siteWidth{ width:1000px; position:relative;  margin:0 auto;  height:299px;  }
+.banner .bd li a{ height:299px; display:block;  }
+.banner .bd .txt{ position:absolute; width:415px; top:100px; left:22px;   font:normal 18px/30px "Microsoft YaHei";    }
+.banner-shadow{ height:50px; line-height:50px; background:url(../images/banner-shdow.png) repeat-x;}
+.footer{text-align:center; font-size:12px; color:#999999;}
+.login-aside{position:absolute; width:320px; height:380px; z-index:9999999; border-radius:5px; left:58%; top:40px;}
+
+
+.error-box{
+color:#f7ccc8;
+font-size:12px;
+margin-bottom:10px;
 }
 
-.signinpanel {
-    width: 750px;
-    margin: 10% auto 0 auto;
-}
 
-.signinpanel .logopanel {
-    float: none;
-    width: auto;
-    padding: 0;
-    background: none;
-}
-
-.signinpanel .signin-info ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.signinpanel .form-control {
+label.form-label {
     display: block;
-    margin-top: 15px;
+    float: none;
+    height: auto;
+    line-height: 12px;
+    text-align: left;
+    width: auto;
+	font-size:14px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow:1px 1px 1px #4e6877;
+	-o-text-shadow:1px 1px 1px #4e6877;
+	-o-moz-shadow:1px 1px 1px #4e6877;
+	-o-mis-shadow:1px 1px 1px #4e6877;
+	-o-webkit-shadow:1px 1px 1px #4e6877;
+	margin-top:16px;
+	margin-bottom:16px;
 }
 
-.signinpanel .uname {
-    background: #fff url(../img/user.png) no-repeat 95% center;color:#333;
+#o-box-up,#o-box-down {
+    width:320px;
+    height:380px;
+    position:absolute;
+	border-radius:5px;
+
+}
+#o-box-up {
+    background-color:#000;
+    filter:alpha(opacity:40);
+    opacity:0.4;
+}
+ 
+#o-box-down{ padding:30px 0 0 40px;}
+
+.i-text{ 
+  width:240px;
+  height:37px;
+  line-height:37px;
+  border:1px solid #858585;
+  background:#eef3f8;
+  color:#9cb5cd;
+  font-size:14px; 
+  text-indent:12px; 
+  box-shadow:1px 1px 1px #dfe4e8 inset;
+  -moz-box-shadow:1px 1px 1px #dfe4e8 inset;
+  -webkit-box-shadow:1px 1px 1px #dfe4e8 inset;
+  -o-box-shadow:1px 1px 1px #dfe4e8 inset;
+  -mis-box-shadow:1px 1px 1px #dfe4e8 inset;
+ }
+ 
+ .yzm{ width:112px;}
+ .yzm-img{ position:absolute; left:130px; top:30px; cursor:pointer;}
+
+.btn-login{ width:242px; height:38px; background:url(../images/login-btn.png) no-repeat; border:none; margin-top:5px;}
+
+
+
+
+.h-light{
+  border:1px solid #80acd9;
+  background:#fff;
+  color:#9cb5cd;
+  font-size:14px; 
+  text-indent:12px; 
+  border-color: #0787be;
+  box-shadow: 0 1px 4px rgba(11, 122, 179, 0.65) inset, 0 0 14px rgba(11, 122, 179, 0.45);
+
 }
 
-.signinpanel .pword {
-    background: #fff url(../img/locked.png) no-repeat 95% center;color:#333;
-}
 
-.signinpanel .btn {
-    margin-top: 15px;
-}
 
-.signinpanel form {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255,255,255,.3);
-    -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    padding: 30px;
-}
 
-.signup-footer{border-top: solid 1px rgba(255,255,255,.3);margin:20px 0;padding-top: 15px;}
 
-@media screen and (max-width: 768px) {
-    .signinpanel,
-    .signuppanel {
-        margin: 0 auto;
-        width: 420px!important;
-        padding: 20px;
-    }
-    .signinpanel form {
-        margin-top: 20px;
-    }
-    .signup-footer {
-        margin-bottom: 10px;
-    }
-    .signuppanel .form-control {
-        margin-bottom: 10px;
-    }
-    .signup-footer .pull-left,
-    .signup-footer .pull-right {
-        float: none !important;
-        text-align: center;
-    }
-    .signinpanel .signin-info ul {
-        display: none;
-    }
-}
-@media screen and (max-width: 320px) {
-    .signinpanel,
-    .signuppanel {
-        margin:0 20px;
-        width:auto;
-    }
-}
+
+
+
+
+
+
+
