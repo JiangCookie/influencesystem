@@ -30,7 +30,7 @@
         <div id="nav_user"><em>zhangsan</em></div>
         <input id="nameId" name="nameId" hidden value="">
 
-            <img src="images/logout.png" alt="" id="" style="width: 30px;margin-left: 10px">
+            <!--<img src="images/logout.png" alt="" id="" style="width: 30px;margin-left: 10px">-->
 
     </div>
 </div>
@@ -105,7 +105,7 @@
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-primary" type="submit" id="dd">保存</button>
+                                <a href="/newform" class="btn btn-primary"  id="dd">保存</a>
                                 <button class="btn btn-white" type="submit">取消</button>
                             </div>
                         </div>
@@ -259,9 +259,10 @@
                 "submit_id": $('input[name="nameId"]').val()
             },
             success: function (res) {
-                console.log(res);
+                window.location.href="http://localhost:8083/newform";// location = "newform";
             }
         })
+
     })
 
 

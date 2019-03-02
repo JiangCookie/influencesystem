@@ -96,7 +96,8 @@ layui.use('table', function () {
                 }
             });
         }
-
+        location.reload();
     });
+
 });
 
