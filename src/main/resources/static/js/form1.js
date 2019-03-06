@@ -28,10 +28,10 @@ $("#add").click(function () {
 });
 layui.use('table', function () {
     var table = layui.table;
-
     table.render({
         elem: '#test'
         , url: 'http://localhost:8083/fault/list.do'
+        ,method: 'POST'
         , toolbar: '#toolbarDemo'
         , title: '用户数据表'
         , cols: [[
@@ -44,11 +44,28 @@ layui.use('table', function () {
             , {field: 'troubleState', title: '故障状态', width: 150, templet: '#idToStr'}
             , {fixed: 'right', title: '操作', width: 223, templet: '#checkFinish'}
         ]]
-        , page: false
+        ,page: true
         , initSort: {
             field: 'troubleState' //排序字段，对应 cols 设定的各字段名
             ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
         }
+        ,id: 'testReload'
+    });
+
+
+
+    //搜索
+    $('.search').on('click', function(){
+        var demoReload = $('#demoReload');
+        //执行重载
+        table.reload('testReload', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            ,where: {
+                keyWord: demoReload.val()
+            }
+        });
     });
 
     //头工具栏事件
@@ -96,7 +113,8 @@ layui.use('table', function () {
                 }
             });
         }
-
+        location.reload();
     });
+
 });
 

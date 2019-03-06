@@ -1,8 +1,8 @@
 package com.sitech.tc.influencesystem.controller;
 
-import com.sitech.tc.influencesystem.common.ServerResponse;
-import com.sitech.tc.influencesystem.common.TypeEnum;
+import com.sitech.tc.influencesystem.common.*;
 import com.sitech.tc.influencesystem.pojo.Trouble;
+import com.sitech.tc.influencesystem.pojo.User;
 import com.sitech.tc.influencesystem.service.AddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -24,6 +25,9 @@ public class FaultController {
 
     @Autowired
     private AddService addService;
+
+    @Autowired
+    public RedisOperator redis;
 
     /**
      * @Description 添加故障
@@ -70,11 +74,21 @@ public class FaultController {
      * @Description 查询故障列表
      * @return
      */
-    @GetMapping("list.do")
-    public Map<String,Object> selete(){
-        return addService.getList();
+    @PostMapping("list.do")
+    public Map<String,Object> selete(HttpServletRequest request,String keyWord, int page, int limit){
+        String loginToken = CookieUtil.readLoginToken(request);
+        User user = JsonUtils.jsonToPojo(redis.get(loginToken),User.class);
+        if(user.getRole() == 2){
+            if(keyWord != null){
+                return addService.search(keyWord,page,limit,2);
+            }
+            return addService.getList(page,limit,2);
+        }
+        if(keyWord != null){
+            return addService.search(keyWord,page,limit,0);
+        }
+        return addService.getList(page,limit,0);
     }
-
 
 
 }

@@ -19,6 +19,11 @@ public class User {
     private String password;
 
     /**
+     * 1 管理员  2  普通用户
+     */
+    private Integer role;
+
+    /**
      * @return user_id
      */
     public Byte getUserId() {
@@ -66,5 +71,23 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    /**
+     * 获取1 管理员  2  普通用户
+     *
+     * @return role - 1 管理员  2  普通用户
+     */
+    public Integer getRole() {
+        return role;
+    }
+
+    /**
+     * 设置1 管理员  2  普通用户
+     *
+     * @param role 1 管理员  2  普通用户
+     */
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

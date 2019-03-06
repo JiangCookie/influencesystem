@@ -1,6 +1,7 @@
 package com.sitech.tc.influencesystem.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sitech.tc.influencesystem.common.ServerResponse;
 import com.sitech.tc.influencesystem.common.TypeEnum;
 import com.sitech.tc.influencesystem.mapper.TroubleMapper;
@@ -8,6 +9,7 @@ import com.sitech.tc.influencesystem.pojo.Trouble;
 import com.sitech.tc.influencesystem.service.AddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 
 import java.util.HashMap;
@@ -36,19 +38,21 @@ public class AddServiceImpl implements AddService {
     }
 
     @Override
-    public Map<String,Object> getList() {
-        List<Trouble> result = troubleMapper.selectAll();
-//        for(int i=0;i<result.size();i++){
-//            Integer type = result.get(i).getTroubleState();
-//           result.get(i).setTroubleState(String.valueOf(type));
-//        }
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("code",0);
-        resultMap.put("data",result);
-        resultMap.put("msg","");
-        resultMap.put("count",1000);
+    public Map<String,Object> getList(int page,int limit,int submitId) {
+        if(submitId == 2){
+            PageHelper.startPage(page,limit);
 
-        return resultMap;
+            Example example = new Example(Trouble.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("submitId",2);
+            List<Trouble> result = troubleMapper.selectByExample(example);
+            return change(result);
+        }
+        PageHelper.startPage(page,limit);
+        List<Trouble> result = troubleMapper.selectAll();
+
+
+        return change(result);
     }
 
     @Override
@@ -74,6 +78,41 @@ public class AddServiceImpl implements AddService {
         return ServerResponse.createByErrorMessage("更新故障失败");
     }
 
+    @Override
+    public Map<String,Object> search(String keyWord,int page,int limit,int submitId) {
+        if(submitId == 2){
+            PageHelper.startPage(page,limit);
+            Example example = new Example(Trouble.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("submitId",2);
+            criteria.orLike("tableName","%" + keyWord + "%");
+            criteria.orLike("createTime","%" + keyWord + "%");
+            List<Trouble> result = troubleMapper.selectByExample(example);
+            return change(result);
+        }
+
+        PageHelper.startPage(page,limit);
+        Example example = new Example(Trouble.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.orLike("tableName","%" + keyWord + "%");
+        criteria.orLike("createTime","%" + keyWord + "%");
+        List<Trouble> result = troubleMapper.selectByExample(example);
+
+
+        return change(result);
+    }
+
+
+
+    private Map<String,Object> change(List result){
+        PageInfo pageInfo = new PageInfo(result);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("code",0);
+        resultMap.put("data",pageInfo.getList());
+        resultMap.put("msg","");
+        resultMap.put("count",pageInfo.getTotal());
+        return  resultMap;
+    }
     /**
      * 枚举固定值
      * @param type

@@ -104,21 +104,21 @@
 
             <form class="registerform" method="post" action="">
                 <div class="fm-item">
-                    <label for="logonId" class="form-label">登录账号：</label>
+                    <label  class="form-label">登录账号：</label>
                     <input type="text" value="" maxlength="100" id="username" class="i-text"
                            datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！" placeholder="请输入账号">
                     <div class="ui-form-explain"></div>
                 </div>
 
                 <div class="fm-item">
-                    <label for="logonId" class="form-label">登陆密码：</label>
+                    <label class="form-label">登录密码：</label>
                     <input type="password" value="" maxlength="100" id="password" class="i-text" datatype="*6-16"
                            nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" placeholder="请输入密码">
                     <div class="ui-form-explain"></div>
                 </div>
 
                 <div class="fm-item">
-                    <label for="logonId" class="form-label"></label>
+                    <label class="form-label"></label>
                     <input type="button" value="" tabindex="4" id="send-btn" class="btn-login">
                     <div class="ui-form-explain"></div>
                 </div>
@@ -161,7 +161,7 @@
             success: function (result) {
                 console.log(result.status)
                 if (result.status == 0) {
-                    location = "newform";
+                    location = "newform1";
                 }
             }
         })

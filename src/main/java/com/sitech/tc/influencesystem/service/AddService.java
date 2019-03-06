@@ -26,7 +26,7 @@ public interface AddService {
      * @Description: 获取故障列表
      * @return
      */
-    Map<String,Object> getList();
+    Map<String,Object> getList(int page,int limit,int submitId);
 
     /**
      * @Description: 删除故障
@@ -42,5 +42,10 @@ public interface AddService {
      */
     ServerResponse update(Trouble trouble);
 
-
+    /**
+     * @Description: 模糊查询
+     * @param keyWord
+     * @return
+     */
+    Map<String,Object> search(String keyWord,int page,int limit,int submitId);
 }

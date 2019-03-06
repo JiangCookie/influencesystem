@@ -6,7 +6,7 @@
     <!-- 具体配置内容 -->
 
     <!--指定驱动的路径-->
-    <classPathEntry location="C:\Users\jiang\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
+    <classPathEntry location="C:\Users\XH\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
 
     <!--指定生成一组对象的环境-->
     <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -51,9 +51,7 @@
         <table tableName="user"  catalog="sonar">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
         </table>
-        <table tableName="trouble"  catalog="sonar">
-            <property name="ignoreQualifiersAtRuntime" value="true"/>
-        </table>
+
 
     </context>
 
